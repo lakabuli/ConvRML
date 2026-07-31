@@ -26,7 +26,8 @@ git clone --recurse-submodules https://github.com/lakabuli/ConvRML.git
 
 ### 2. Downloading the Datasets
 
-* **Parallel Lensless Dataset (PLD):** Download via the [Waller Lab PLD Page](https://waller-lab.github.io/parallel-lensless-dataset/).
+* **Parallel Lensless Dataset (PLD):** Download via [Dataset Google Drive Link](https://drive.google.com/drive/folders/1CqPliG5rZIYH5zA6cXdrA6cvDF7obbvc?usp=sharing), project page coming soon!
+<!-- [Waller Lab PLD Page](https://waller-lab.github.io/parallel-lensless-dataset/). -->
 * **DiffuserCam Lensless Mirflickr Dataset (DLMD) — <span style="color: orange;">OPTIONAL</span>:** Download via the [Lensless Learning Dataset Page](https://waller-lab.github.io/LenslessLearning/dataset.html).
 
 Set `dataset.data_path` in your config to the dataset root below. Folder names must match exactly; training looks them up by these relative paths.
