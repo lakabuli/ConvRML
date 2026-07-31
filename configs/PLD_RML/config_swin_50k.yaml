@@ -1,0 +1,61 @@
+gpu_setup:
+  gpu_visible_id: "1"      # Which gpus are visible to your device
+  gpu_num: 0            # For single gpu training, choose which gpu to use.
+  num_workers: 4
+  parallel: False
+
+# Inference-only overrides (lets you run on a different GPU / save subset of ids)
+infer:
+  gpu_visible_id: "1"     
+  gpu_num: 0             
+  batch_size: 1         
+  save_ids: [1, 64, 93, 195, 912]            # list of numeric ids to save (e.g. [64, 915]); leave empty [] to not save any images 
+  save_uncropped: False    # whether to save uncropped output 
+  save_metrics: True
+  save_infer_dir: "./infer_results"
+
+modes:
+  wandb_on: True       # turns off wandb logging when False
+  full_fov_loss: False
+  img_number: 64    # for loading sample image for wandb visualization. 
+
+checkpoint:
+  load_checkpoint: False
+  load_path: ""         
+  wandb_id: ""    # TODO: if loading checkpoint, specify wandb id (eg: "qt8qezs1") to continue logging to same run. Otherwise, leave as None for new run.
+  project_name: "convrml"
+  save_checkpoint_path: "./checkpoints/"
+  save_intermediate: True
+  save_freq: 5     # saves models every n epochs, in addition to saving best and latest models
+
+dataset:
+  name: "rml"
+  downsize_factor: 4
+  size: 0.5             # use 100 * size % of the training data. Set to 1 to use all data.
+  use_processed: True          # True means we are using preprocessed ground truth data (x4 downsampled and GT is in imager space)
+  data_path: ""  # TODO: REPLACE with path to the dataset directory containing ground truth and measurements
+
+dataloader: 
+  batch_size: 6
+  lr: 5e-4
+  warmup_epochs: 10
+  
+model:
+  type: "swin"       # options are "convnext", "basic_transformer", "swin"
+  alpha: 0
+  num_epochs: 35
+  input_height: 300    
+  input_width: 480
+  output_height: 300
+  output_width: 480
+  n_channels: 3
+  num_heads_swin: [4, 8, 16, 32]
+  num_blocks: 6
+  embed_dim: 128            # dimension of embedding/hidden layer in Transformer
+  patch_size: [15, 15]           # for x4 downsample: height = 300, width = 480. 300/15, 480/15 = 20 patches, 32 patches.
+  ffn_multiplier: 2
+  dropout_rate: 0.1
+
+
+
+

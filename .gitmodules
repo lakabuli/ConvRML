@@ -1,0 +1,6 @@
+[submodule "models/Lensless_Imaging_Transformer"]
+	path = models/Lensless_Imaging_Transformer
+	url = git@github.com:ponoma1202/Lensless_Imaging_Transformer.git
+[submodule "parallel-lensless-dataset"]
+	path = parallel-lensless-dataset
+	url = git@github.com:Waller-Lab/parallel-lensless-dataset.git
