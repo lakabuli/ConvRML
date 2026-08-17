@@ -1,9 +1,9 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite the associated paper below."
 type: software
-title: "ConvRML: High-Quality Lensless Imaging with Random Multi-Focal Lenslets"
+title: "ConvRML: high-quality lensless imaging with random multi-focal lenslets"
 version: 1.0.0
-date-released: 2026-07-31 # TODO replace with zenodo release data
+date-released: 2026-08-17 # TODO replace with zenodo release date
 # doi: # TODO replace with zeonodo DOI 
 repository-code: https://github.com/lakabuli/ConvRML
 authors:
@@ -25,7 +25,7 @@ authors:
 
 preferred-citation:
   type: article
-  title: "ConvRML: High-Quality Lensless Imaging with Random Multi-Focal Lenslets"
+  title: "ConvRML: high-quality lensless imaging with random multi-focal lenslets"
   authors:
   - family-names: "Kabuli"
     given-names: "Leyla"

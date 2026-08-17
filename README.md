@@ -1,8 +1,8 @@
-# ConvRML: High-Quality Lensless Imaging with Random Multi-Focal Lenslets
+# ConvRML: high-quality lensless imaging with random multi-focal lenslets
 
 ## About 
 
-This repository contains code for the paper **ConvRML: High-Quality Lensless Imaging with Random Multi-Focal Lenslets**.
+This repository contains code for the paper "ConvRML: high-quality lensless imaging with random multi-focal lenslets".
 
 [![arXiv](https://img.shields.io/badge/arXiv-2602.04834-b31b1b.svg)](https://doi.org/10.48550/arXiv.2602.04834)
 
@@ -18,7 +18,7 @@ For standard usage:
 git clone https://github.com/lakabuli/ConvRML.git
 ```
 
-This repository also includes optional git submodules. Use a recursive clone for the Parallel Lensless Dataset capture and processing code and/or additional comparison models:
+This repository also includes optional git submodules. Use a recursive clone to include additional comparison models and/or Parallel Lensless Dataset capture and processing code:
 
 ```
 git clone --recurse-submodules https://github.com/lakabuli/ConvRML.git
@@ -26,9 +26,8 @@ git clone --recurse-submodules https://github.com/lakabuli/ConvRML.git
 
 ### 2. Downloading the Datasets
 
-* **Parallel Lensless Dataset (PLD):** Download via [Dataset Google Drive Link](https://drive.google.com/drive/folders/1CqPliG5rZIYH5zA6cXdrA6cvDF7obbvc?usp=sharing), project page coming soon!
-<!-- [Waller Lab PLD Page](https://waller-lab.github.io/parallel-lensless-dataset/). -->
-* **DiffuserCam Lensless Mirflickr Dataset (DLMD) — <span style="color: orange;">OPTIONAL</span>:** Download via the [Lensless Learning Dataset Page](https://waller-lab.github.io/LenslessLearning/dataset.html).
+* **Parallel Lensless Dataset (PLD):** Download from the [ConvRML Project Page](https://lakabuli.github.io/ConvRML/).
+* **DiffuserCam Lensless Mirflickr Dataset (DLMD) <span style="color: orange;">OPTIONAL</span>:** Download from the [Lensless Learning Dataset Page](https://waller-lab.github.io/LenslessLearning/dataset.html).
 
 Set `dataset.data_path` in your config to the dataset root below. Folder names must match exactly; training looks them up by these relative paths.
 
@@ -116,7 +115,7 @@ Configure your local paths and training parameters inside the `config.yaml` file
 
 ## Running Pretrained Models
 
-If you want to work directly with our existing trained models, download them with the script provided in the `checkpoints/` folder. The models are hosted externally on [Google Drive](https://drive.google.com/drive/folders/14SLe_-DuO34XiLWXBi_ExhgyKS0BUK4K?usp=sharing).
+If you want to work directly with our existing trained models, download them with the script provided in the `checkpoints/` folder. The models are linked on the [ConvRML Project Page](https://lakabuli.github.io/ConvRML/) and hosted externally on [Google Drive](https://drive.google.com/drive/folders/14SLe_-DuO34XiLWXBi_ExhgyKS0BUK4K?usp=sharing).
 
 Requires `gdown` (`pip install gdown`), then:
 
@@ -130,7 +129,7 @@ The download script places each model at `checkpoints/<run_name>/best_model.pth`
 
 ### PLD dataset 
 1. **Preprocessing Constraints:** This implementation inherently assumes the use of 4x downsampled measurements warped directly to imager space. Ensure `use_processed` is set to `True` if this is the case. Non-warped configurations are also supported, but alternative downsampling levels are not explicitly handled.
-2. **AWB Homographies:** To instead work with the Automatic White Balance (AWB) version of the dataset, download AWB homographies from the project repository and hard-override the default absolute paths inside the following components:
+2. **AWB Homographies:** To instead work with the Automatic White Balance (AWB) version of the dataset, download the AWB dataset and AWB homographies from the [ConvRML Project Page](https://lakabuli.github.io/ConvRML/) and hard-override the default absolute paths inside the following components:
     - The `ScalableDataset` class definition inside `dataset.py`
     - The `load_image_pair_rml_diffuser` function inside `utils.py`
     - Explicit homography dictionary paths declared in `infer.py`
@@ -148,7 +147,7 @@ The U-Net model architecture and weights referenced in this repository are adapt
 * **Original Repository:** [Waller-Lab/LenslessLearning](https://github.com/Waller-Lab/LenslessLearning)
 * **Paper Citation:** Kristina Monakhova, Joshua Yurtsever, Grace Kuo, Nick Antipa, Kyrollos Yanny, and Laura Waller, "Learned reconstructions for practical mask-based lensless imaging," Opt. Express 27, 28075-28090 (2019)
 
-## Citation
+## Paper
 ```bibtex
 @article{Kabuli2026ConvRML,
   author = {Leyla A. Kabuli and Clara S. Hung and Vasilisa Ponomarenko and Eric Markley and Laura Waller},
@@ -159,3 +158,8 @@ The U-Net model architecture and weights referenced in this repository are adapt
   url = {https://arxiv.org/abs/2602.04834},
 }
 ```
+
+
+## Contact 
+
+Please reach out to lakabuli@berkeley.edu with any questions or concerns.
