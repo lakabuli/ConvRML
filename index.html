@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="ConvRML combines a random multi-focal lenslet phase mask with ConvNeXt reconstruction for high-quality lensless imaging.">
+  <meta name="keywords" content="lensless imaging, random multi-focal lenslets, ConvNeXt, computational imaging">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ConvRML: high-quality lensless imaging with random multi-focal lenslets</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" type="image/png" sizes="48x48" href="./favicon.png?v=2">
+  <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico?v=2">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script defer src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div id="navbar-menu" class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://lakabuli.github.io" aria-label="Home">
+        <span class="icon">
+          <i class="fas fa-home"></i>
+        </span>
+      </a>
+      <a class="navbar-item" href="https://drive.google.com/drive/folders/1CqPliG5rZIYH5zA6cXdrA6cvDF7obbvc?usp=sharing">
+        Dataset
+      </a>
+      <a class="navbar-item" href="https://lakabuli.github.io/research">
+        More Research
+      </a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero publication-header">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">ConvRML: high-quality lensless imaging with random multi-focal lenslets</h1>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><a href="https://lakabuli.github.io/">Leyla A. Kabuli</a>,</span>
+            <span class="author-block"><a href="https://www.linkedin.com/in/clarashung/">Clara S. Hung</a>,</span>
+            <span class="author-block"><a href="https://www.linkedin.com/in/vasilisa-ponomarenko/">Vasilisa Ponomarenko</a>,</span>
+            <span class="author-block"><a href="https://emarkley.github.io/">Eric Markley</a>,</span>
+            <span class="author-block"><a href="https://www.laurawaller.com/">Laura Waller</a></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Department of Electrical Engineering and Computer Sciences,
+              <br>
+              University of California, Berkeley</span>
+          </div>
+
+          <div class="is-size-6 publication-authors">
+            <span class="author-block">
+              Correspondence to: lakabuli@berkeley.edu
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <div style="height:5px;"><br></div>
+              arXiv
+            </span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2602.04834"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2602.04834"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/lakabuli/ConvRML"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://drive.google.com/drive/folders/1CqPliG5rZIYH5zA6cXdrA6cvDF7obbvc?usp=sharing"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="far fa-images"></i></span>
+                  <span>Dataset</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-paddingless">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="hero-body overview-figure">
+          <img id="convrml-overview"
+               src="./overview_website.png"
+               alt="Overview of the ConvRML imaging system, dataset acquisition, reconstruction architecture, and results."
+               style="max-height:100%; max-width:100%;">
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Mask-based lensless imagers use simple optics and computational reconstruction to design compact form factor cameras with compressive imaging ability. However, these imagers generally suffer from poor reconstruction quality. Here, we describe several advances in both hardware and software that result in improved lensless imaging quality. First, we use a precision-manufactured random multi-focal lenslet (RML) phase mask to produce improved measurements with reduced multiplexing. Next, we implement a ConvNeXt-based reconstruction architecture, which provides up to 4.6 dB improvement in peak signal-to-noise ratio over state-of-the-art attention-based architectures. Finally, we establish a parallel imaging setup that simultaneously images a scene with RML, diffuser, and lens systems, with which we collect datasets with 100,000 measurements for each system, to be used for reconstruction model training and evaluation. Using this standardized system, we quantify the improved measurement quality of the RML compared to a diffuser using the modulation transfer function and mutual information. Our ConvRML system benefits from both the optical and the computational developments presented in this work, and our contributions establish resources to support the continued development of high-quality, compact, and compressive lensless imagers.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section pld-section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Parallel Lensless Dataset</h2>
+        <div class="content has-text-justified">
+          <p>
+            The Parallel Lensless Dataset (PLD) contains 100,000 measurements from RML and diffuser lensless imaging systems, along with corresponding ground truth images. The dataset can be <a href="https://drive.google.com/drive/folders/1CqPliG5rZIYH5zA6cXdrA6cvDF7obbvc?usp=sharing">downloaded from Google Drive</a>. <!-- All measurements are organized in batches of 25,000 for easier download. -->
+          </p>
+          <p>
+            The PLD also contains additional materials, including data for <a href="https://drive.google.com/drive/folders/1l09Nv7POYKny0IkEAj3bgJiA-xPP33n_?usp=share_link">camera calibration</a> and <a href="https://drive.google.com/drive/folders/1nr1pUrg80JQm8WyLa6wvFktmJ_pniOio?usp=share_link">system characterization</a>.
+          </p>
+          <p>
+            To build your own parallel data acquisition setup, please refer to the <a href="https://waller-lab.github.io/parallel-lensless-dataset/">PLD hardware page</a> and the <a href="https://drive.google.com/drive/folders/15JpZnptw-WdTTswZ4XJuMa04nAh_UL9q?usp=share_link">RML height map</a>.
+          </p>
+          <p>
+            An alternate Automatic White Balance Parallel Lensless Dataset (AWB-PLD), which contains 100,000 measurements with gamma correction and varying color balance, can also be <a href="https://drive.google.com/drive/folders/1ab6NKXacNKGtEvtiPBoVCjdZLcydn_vS?usp=share_link">downloaded from Google Drive</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Code</h2>
+        <div class="content has-text-justified">
+          <p>
+            All code is available on <a href="https://github.com/lakabuli/ConvRML">GitHub</a>. Pretrained models can be <a href="https://drive.google.com/drive/folders/14SLe_-DuO34XiLWXBi_ExhgyKS0BUK4K?usp=sharing">downloaded from Google Drive</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Related Links</h2>
+        <div class="content has-text-justified">
+          <p>
+            Also check out our work on <a href="https://lakabuli.github.io/posts/lensless_information_theory.html">designing lensless imaging systems to maximize information capture</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{Kabuli2026ConvRML,
+  author = {Leyla A. Kabuli and Clara S. Hung and Vasilisa Ponomarenko and Eric Markley and Laura Waller},
+  title = {ConvRML: high-quality lensless imaging with random multi-focal lenslets},
+  journal = {arXiv},
+  year = {2026},
+  doi = {10.48550/arXiv.2602.04834},
+  url = {https://arxiv.org/abs/2602.04834}
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <p>
+            Website template from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
