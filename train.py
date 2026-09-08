@@ -101,7 +101,9 @@ def main():
         model = torch.nn.DataParallel(model)
     model.to(device)
 
-    optimizer = torch.optim.AdamW(model.parameters(), lr=config.dataloader.lr, weight_decay=1e-3)         
+    optimizer = torch.optim.AdamW(model.parameters(), lr=config.dataloader.lr, weight_decay=1e-3)   
+    linear_warmup = torch.optim.lr_scheduler.LinearLR(optimizer, start_factor=1/config.dataloader.warmup_epochs, end_factor=1.0, total_iters=config.dataloader.warmup_epochs-1, last_epoch=-1)
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer=optimizer, T_max=config.model.num_epochs-config.dataloader.warmup_epochs, eta_min=1e-5)
     criterion = MSE_Perceptual_Loss(device, alpha=config.model.alpha)       
 
     if config.checkpoint.load_checkpoint:
@@ -115,6 +117,11 @@ def main():
         else:
             model.load_state_dict(checkpoint['model_state_dict'])
 
+        if 'linear_warmup_state_dict' in checkpoint:
+            linear_warmup.load_state_dict(checkpoint['linear_warmup_state_dict'])
+        if 'scheduler_state_dict' in checkpoint:
+            scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
+
         optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         best_loss = checkpoint.get('best_loss', float('inf'))
         print(f"Loaded checkpoint from epoch {checkpoint['epoch']+1}.")
@@ -126,6 +133,8 @@ def main():
         train_loader, 
         val_loader, 
         optimizer,
+        linear_warmup,
+        scheduler,
         criterion,
         device,
         start_epoch,
@@ -137,9 +146,7 @@ def main():
 
 
 # Includes both training and validation
-def train(model, train_loader, val_loader, optimizer, criterion, device, start_epoch, best_loss, save_path, config):
-    linear_warmup = torch.optim.lr_scheduler.LinearLR(optimizer, start_factor=1/config.dataloader.warmup_epochs, end_factor=1.0, total_iters=config.dataloader.warmup_epochs-1, last_epoch=-1)
-    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer=optimizer, T_max=config.model.num_epochs-config.dataloader.warmup_epochs, eta_min=1e-5) 
+def train(model, train_loader, val_loader, optimizer, linear_warmup, scheduler, criterion, device, start_epoch, best_loss, save_path, config):
 
     # Training metrics
     train_psnr = PSNR(data_range=1.0).to(device)
@@ -181,25 +188,33 @@ def train(model, train_loader, val_loader, optimizer, criterion, device, start_e
                        "learning rate":optimizer.param_groups[-1]['lr'],
                        "reconstructed butterfly": wandb.Image(sample_out),
                        "ground truth butterfly": wandb.Image(sample_target)})
+
+        # .step() should occur before saving to prepare for the next epoch
         if epoch < config.dataloader.warmup_epochs:
             linear_warmup.step()
         else:
             scheduler.step()
+
+        is_best = val_mse_loss < best_loss
+
+        if is_best:
+            best_loss = val_mse_loss
         
         # save latest model for resuming training
         checkpoint = {
             'epoch': epoch,
             'model_state_dict': model.module.state_dict() if hasattr(model, 'module') else model.state_dict(),
+            'linear_warmup_state_dict': linear_warmup.state_dict(),
+            'scheduler_state_dict': scheduler.state_dict(),
             'optimizer_state_dict': optimizer.state_dict(),
             'best_loss': best_loss
         }
         torch.save(checkpoint, os.path.join(save_path, 'latest_model.pth'))
 
         # save best model
-        if val_mse_loss < best_loss:
+        if is_best:
             torch.save(checkpoint, os.path.join(save_path, 'best_model.pth'))
-            print("New best model at epoch", epoch+1, "\n")
-            best_loss = val_mse_loss
+            print("New best model at epoch", epoch + 1, "\n")
 
         # save intermediate models if save_intermediate is True
         if (epoch + 1) % config.checkpoint.save_freq == 0 and config.checkpoint.save_intermediate:

@@ -4,6 +4,7 @@
 
 This repository contains code for the paper "ConvRML: high-quality lensless imaging with random multi-focal lenslets".
 
+[![paper-Optica](https://img.shields.io/badge/paper-Optics%20Express-5C2D91.svg)](https://doi.org/10.1364/OE.608614)
 [![arXiv](https://img.shields.io/badge/arXiv-2602.04834-b31b1b.svg)](https://doi.org/10.48550/arXiv.2602.04834)
 
 <img src="./configs/ConvRML_overview.png" alt="ConvRML_overview_figure" width=100%>
@@ -27,7 +28,7 @@ git clone --recurse-submodules https://github.com/lakabuli/ConvRML.git
 ### 2. Downloading the Datasets
 
 * **Parallel Lensless Dataset (PLD):** Download from the [ConvRML Project Page](https://lakabuli.github.io/ConvRML/).
-* **DiffuserCam Lensless Mirflickr Dataset (DLMD) <span style="color: orange;">OPTIONAL</span>:** Download from the [Lensless Learning Dataset Page](https://waller-lab.github.io/LenslessLearning/dataset.html).
+* **DiffuserCam Lensless Mirflickr Dataset (DLMD) (<span style="color: orange;">OPTIONAL</span>):** Download from the [Lensless Learning Dataset Page](https://waller-lab.github.io/LenslessLearning/dataset.html).
 
 Set `dataset.data_path` in your config to the dataset root below. Folder names must match exactly; training looks them up by these relative paths.
 
@@ -117,13 +118,13 @@ Configure your local paths and training parameters inside the `config.yaml` file
 
 If you want to work directly with our existing trained models, download them with the script provided in the `checkpoints/` folder. The models are linked on the [ConvRML Project Page](https://lakabuli.github.io/ConvRML/) and hosted externally on [Google Drive](https://drive.google.com/drive/folders/14SLe_-DuO34XiLWXBi_ExhgyKS0BUK4K?usp=sharing).
 
-Requires `gdown` (`pip install gdown`), then:
+Downloading requires `gdown` (`pip install gdown`), then:
 
 ```
 ./checkpoints/download_pretrained.sh
 ```
 
-The download script places each model at `checkpoints/<run_name>/best_model.pth`. To get metrics and reconstructions, use `infer.py`, which will place results in `infer_results/<run_name>/`. Set `dataset.data_path` in the chosen config before running.
+The download script places each model at `checkpoints/<run_name>/best_model.pth`. For corresponding metrics and reconstructions, use `infer.py`, which will place results in `infer_results/<run_name>/`. Set `dataset.data_path` in the selected config file before running.
 
 ## Dataset Considerations & Remarks
 
@@ -152,10 +153,14 @@ The U-Net model architecture and weights referenced in this repository are adapt
 @article{Kabuli2026ConvRML,
   author = {Leyla A. Kabuli and Clara S. Hung and Vasilisa Ponomarenko and Eric Markley and Laura Waller},
   title = {ConvRML: High-Quality Lensless Imaging with Random Multi-Focal Lenslets},
-  journal = {arXiv},
+  journal = {Optics Express},
+  number = {18},
+  pages = {33992--34005},
+  publisher = {Optica Publishing Group},
+  volume = {34},
   year = {2026},
-  doi = {10.48550/ARXIV.2602.04834},
-  url = {https://arxiv.org/abs/2602.04834},
+  doi = {10.1364/OE.608614},
+  url = {https://opg.optica.org/oe/abstract.cfm?URI=oe-34-18-33992}
 }
 ```
 
