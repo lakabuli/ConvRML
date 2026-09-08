@@ -3,8 +3,8 @@ message: "If you use this software, please cite the associated paper below."
 type: software
 title: "ConvRML: high-quality lensless imaging with random multi-focal lenslets"
 version: 1.0.0
-date-released: 2026-08-17 # TODO replace with zenodo release date
-# doi: # TODO replace with zeonodo DOI 
+date-released: 2026-08-18 
+doi: 10.5281/zenodo.21987038
 repository-code: https://github.com/lakabuli/ConvRML
 authors:
   - family-names: "Kabuli"
@@ -43,7 +43,10 @@ preferred-citation:
     given-names: "Laura" 
     orcid: https://orcid.org/0000-0003-1243-2356
   year: 2026
-  journal: "arXiv"
-  status: preprint
-  doi: "10.48550/arXiv.2602.04834"
-  url: https://arxiv.org/abs/2602.04834
+  journal: "Optics Express"
+  volume: 34
+  issue: 18
+  start: 33992
+  end: 34005
+  doi: "10.1364/OE.608614"
+  url: https://doi.org/10.1364/OE.608614

@@ -4,6 +4,7 @@
 
 This repository contains code for the paper "ConvRML: high-quality lensless imaging with random multi-focal lenslets".
 
+[![paper-Optica](https://img.shields.io/badge/paper-Optics%20Express-5C2D91.svg)](https://doi.org/10.1364/OE.608614)
 [![arXiv](https://img.shields.io/badge/arXiv-2602.04834-b31b1b.svg)](https://doi.org/10.48550/arXiv.2602.04834)
 
 <img src="./configs/ConvRML_overview.png" alt="ConvRML_overview_figure" width=100%>
@@ -152,10 +153,14 @@ The U-Net model architecture and weights referenced in this repository are adapt
 @article{Kabuli2026ConvRML,
   author = {Leyla A. Kabuli and Clara S. Hung and Vasilisa Ponomarenko and Eric Markley and Laura Waller},
   title = {ConvRML: High-Quality Lensless Imaging with Random Multi-Focal Lenslets},
-  journal = {arXiv},
+  journal = {Optics Express},
+  number = {18},
+  pages = {33992--34005},
+  publisher = {Optica Publishing Group},
+  volume = {34},
   year = {2026},
-  doi = {10.48550/ARXIV.2602.04834},
-  url = {https://arxiv.org/abs/2602.04834},
+  doi = {10.1364/OE.608614},
+  url = {https://opg.optica.org/oe/abstract.cfm?URI=oe-34-18-33992}
 }
 ```
 
